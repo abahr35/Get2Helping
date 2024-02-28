@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div>
+        <form method="post" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <div>
+                    {{ form.town.label() }}
+                    {% if form.town.errors %}
+                        {{ form.town() }}
+                        {% for error in form.town.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.town() }}
+                    {% endif %}
+                </div>
+                <div>
+                    {{ form.topic.label() }}
+                    {% if form.topic.errors %}
+                        {{ form.topic() }}
+                        {% for error in form.topic.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.topic() }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div>
+                {{ form.submit() }}
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
