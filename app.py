@@ -16,7 +16,7 @@ def home():  # put application's code here
 
 @app.route('/testmaps')
 def test_maps():
-    query = gglObj.nearby_search(location="Carol Stream, Illinois", keyword="Recycling Center", radius=5000)
+    query = gglObj.nearby_search(location="Carol Stream,IL", keyword="Recycling Center", radius=5000)
     return render_template('testMaps.html', places=query.places)
 
 @app.route('/search', methods=["GET", "POST"])

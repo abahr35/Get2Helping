@@ -8,11 +8,13 @@
                     {{ form.town.label() }}
                     {% if form.town.errors %}
                         {{ form.town() }}
+                        {{ form.get_location() }}
                         {% for error in form.town.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     {% else %}
                         {{ form.town() }}
+                        {{ form.get_location() }}
                     {% endif %}
                 </div>
                 <div>
@@ -32,4 +34,27 @@
             </div>
         </form>
     </div>
+
+    <script>
+        document.getElementById("get_location").addEventListener("click", function(event){
+            event.preventDefault();
+            getLocation();
+        });
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Assuming you have a text box with id "town" for the town field
+            document.getElementById("town").value = latitude + ", " + longitude;
+        }
+    </script>
 {% endblock content %}
