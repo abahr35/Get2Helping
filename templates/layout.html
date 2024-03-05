@@ -9,6 +9,15 @@
     {% endif %}
 </head>
 <body>
+    <header>
+        <nav>
+            <div>
+                <a href="/">Get2Helping</a>
+                <a href="{{ url_for('search') }}">Search</a>
+                <a href="{{ url_for('test_maps') }}">api test</a>
+            </div>
+        </nav>
+    </header>
     {% block content %}{% endblock %}
 </body>
 </html>
