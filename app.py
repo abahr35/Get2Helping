@@ -17,6 +17,8 @@ def home():  # put application's code here
 @app.route('/testmaps')
 def test_maps():
     query = gglObj.nearby_search(location="Carol Stream,IL", keyword="Recycling Center", radius=5000)
+    for place in query.places:
+        place.get_details()
     return render_template('testMaps.html', places=query.places)
 
 @app.route('/search', methods=["GET", "POST"])
@@ -24,6 +26,8 @@ def search():
     form = LocationInputForm()
     if form.validate_on_submit():
         query = gglObj.nearby_search(location=form.town.data, keyword=form.topic.data, radius=5000)
+        for place in query.places:
+            place.get_details()
         flash(f"Searching for {form.topic.data} ", "success")
         return render_template("testMaps.html", places=query.places)
     else:
