@@ -14,9 +14,9 @@ gglObj = GooglePlaces(gtoken)
 def home():  # put application's code here
     return render_template('home.html', name="Get2Helping")
 
-@app.route('/about')
+@app.route('/Mission')
 def about():  # put application's code here
-    return render_template('about.html', name="about")
+    return render_template('Mission.html', name="Mission")
 
 @app.route('/testmaps')
 def test_maps():
