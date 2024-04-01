@@ -14,6 +14,10 @@ gglObj = GooglePlaces(gtoken)
 def home():  # put application's code here
     return render_template('home.html', name="Get2Helping")
 
+@app.route('/about')
+def about():  # put application's code here
+    return render_template('about.html', name="about")
+
 @app.route('/testmaps')
 def test_maps():
     query = gglObj.nearby_search(location="Carol Stream,IL", keyword="Recycling Center", radius=5000)
