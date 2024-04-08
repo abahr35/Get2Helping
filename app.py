@@ -2,7 +2,6 @@ import dotenv
 import os
 from flask import Flask, render_template, flash
 from googleplaces import GooglePlaces
-
 from forms import LocationInputForm
 
 dotenv.load_dotenv()

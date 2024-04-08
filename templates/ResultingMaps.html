@@ -8,8 +8,19 @@
         {% for place in places %}
             <li class="container-fluid border py-3 my-1">
                 <h3>{{ place.name }}</h3>
+
+                {# Website #}
                 {% if place.website %}
-                 <button onclick=" window.open('{{ place.website }}','_blank')"> Website</button>
+                    <button type="button" class="btn btn-primary" onclick=" window.open('{{ place.website }}','_blank')">Website</button>
+                {% else %}
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Website Unavailable" disabled>Website</button>
+                {% endif %}
+
+                {# Phone Number #}
+                {% if place.local_phone_number %}
+                    <a href="tel:{{ place.local_phone_number }}" class="btn btn-primary">Call</a>
+                {% else %}
+                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Calling Unavailable" disabled>Call</button>
                 {% endif %}
             </li>
         {% endfor %}
