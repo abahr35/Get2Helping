@@ -22,10 +22,53 @@
                 {% else %}
                     <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Calling Unavailable" disabled>Call</button>
                 {% endif %}
+
             </li>
         {% endfor %}
     </ul>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2983.3559422956973!2d-88.08220618902294!3d41.604814082361564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e5de7e212468d%3A0x209b430a53abcc7c!2sLewis%20University!5e0!3m2!1sen!2sus!4v1711046120584!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    {# Map Script - from user coordinates #}
+    <script>
+      let map;
+      let directionsService;
+      let directionsRenderer;
+
+      function initMap() {
+        const userLocation = { lat: 41.9266713, lng: -88.1236418 };
+
+        map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 14,
+          center: userLocation,
+        });
+
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+
+        calculateAndDisplayRoute(directionsService, directionsRenderer, userLocation);
+      }
+
+      function calculateAndDisplayRoute(directionsService, directionsRenderer, userLocation) {
+        const request = {
+          origin: userLocation,
+          destination: { lat:41.93227340669935, lng: -88.07939870317989 }, // Replace with the actual destination coordinates
+          travelMode: 'DRIVING', // Consider different modes to optimize CO2 emissions
+          // Add other parameters if needed
+        };
+
+        directionsService.route(request, (result, status) => {
+          if (status === 'OK') {
+            // Here, you could estimate CO2 emissions and select the least CO2 route
+            directionsRenderer.setDirections(result);
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs8VKdl9noduet_kYpiBM_MRXL64YfZBY&callback=initMap&libraries=&v=weekly" async></script>
+    <div id="map" style="height: 400px; width: 100%;"></div>
+{#    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2983.3559422956973!2d-88.08220618902294!3d41.604814082361564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e5de7e212468d%3A0x209b430a53abcc7c!2sLewis%20University!5e0!3m2!1sen!2sus!4v1711046120584!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>#}
 
 </body>
 {% endblock %}
