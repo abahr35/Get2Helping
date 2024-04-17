@@ -2,7 +2,6 @@ import dotenv
 import os
 from flask import Flask, render_template, flash
 from googleplaces import GooglePlaces
-
 from forms import LocationInputForm
 
 dotenv.load_dotenv()
@@ -26,7 +25,7 @@ def test_maps():
     query = gglObj.nearby_search(location="Carol Stream,IL", keyword="Recycling Center", radius=5000)
     for place in query.places:
         place.get_details()
-    return render_template('testMaps.html', places=query.places)
+    return render_template('ResultingMaps.html', places=query.places)
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
@@ -36,7 +35,7 @@ def search():
         for place in query.places:
             place.get_details()
         flash(f"Searching for {form.topic.data} ", "success")
-        return render_template("testMaps.html", places=query.places)
+        return render_template("ResultingMaps.html", places=query.places)
     else:
         flash("Query Unsuccessful. Please check Town and Topic", "danger")
     return render_template("search.html", form=form)
