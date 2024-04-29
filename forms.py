@@ -4,10 +4,12 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
 class LocationInputForm(FlaskForm):
-    town = StringField("Town", validators=[DataRequired()])
+    town = StringField("Location", validators=[DataRequired()], render_kw={"placeholder": "Location"}, )
     get_location = SubmitField('Get Current Location')
     # (value, label)
     topic = SelectField("Search Topic",
-                        choices=[("Recycling Center", "Recycling Center"), ("Animal Adoption", "Animal Adoption"),
-                                 ("Volunteer Locations", "Volunteer Locations")])
+                        choices=[("", "-- Please Select --"), ("Recycling Center", "Recycling Center"),
+                                 ("Animal Adoption", "Animal Adoption"),
+                                 ("Volunteer Locations", "Volunteer Locations")],
+                        validators=[DataRequired(message="Please select a business type")])
     submit = SubmitField("Search")

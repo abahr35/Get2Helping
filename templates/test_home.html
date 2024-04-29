@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container-fluid justify-content-lg-center">
+        <h1 class="text-center pt-2"><u>Get2Helping</u></h1>
+    </div>
+    <div>
+        <form method="post" action="">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <div class="container border">
+                    <div class="row">
+{#                            {{ form.town.label() }}#}
+                        <div class="col border text-center">
+                            {% if form.town.errors %}
+                            <div class="d-flex align-items-center">
+                            {{ form.town() }}
+                            </div>
+                        <button type="button" class="btn btn-default border " onclick="getLocation()">
+                            <i class="fa fa-map-pin"></i>
+                        </button>
+                        {% for error in form.town.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    {% else %}
+                        {{ form.town() }}
+                        <button type="button" class="btn btn-default border" onclick="getLocation()">
+                            <i class="fa fa-map-pin"></i>
+                        </button>
+                    {% endif %}
+                        </div>
+{#                  {{ form.topic.label() }}#}
+                        <div class="col border  d-flex align-items-center text-center">
+                            {% if form.topic.errors %}
+                                {{ form.topic() }}
+                                {% for error in form.topic.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            {% else %}
+                                {{ form.topic() }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="container-fluid">
+                {{ form.submit() }}
+            </div>
+
+        </form>
+    </div>
+    <script>
+        document.getElementById("get_location").addEventListener("click", function(event){
+            event.preventDefault();
+            getLocation();
+        });
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            // Assumes you have a text box with the id "town". dont change
+            document.getElementById("town").value = latitude + ", " + longitude;
+        }
+    </script>
+{% endblock content %}

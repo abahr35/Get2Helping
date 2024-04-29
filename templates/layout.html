@@ -4,6 +4,7 @@
         <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -21,20 +22,20 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/">Get2Helping</a>
+                    <a class="navbar-brand" href="/">
+                        <img src="{{ url_for('static', filename="images/logo.png")}}" alt="Get2Helping" style="height: 45px">
+                    </a>
                     <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav">
-                            <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
-                            <a href="{{ url_for('search') }}" class="nav-item nav-link">Search</a>
-                            <a href="{{ url_for('test_maps') }}" class="nav-item nav-link">debug-api</a>
-                        </div>
-                            <div class="navbar-nav ms-auto">
-                                <a href="{{ url_for('about') }}" class="nav-item nav-link">Our Mission</a>
-                                <a href="#" class="nav-item nav-link">-</a>
-                            </div>
+{#                        <div class="navbar-nav">#}
+{#                            <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>#}
+{#                            <a href="{{ url_for('about') }}" class="nav-item nav-link">Our Mission</a>#}
+{#                        </div>#}
+                    </div>
+                    <div class="container-fluid justify-content-lg-center">
+                        <h1 class="text-center pt-2"><u>Get2Helping</u></h1>
                     </div>
                 </div>
             </nav>
