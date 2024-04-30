@@ -48,11 +48,24 @@
 
             {# Map Object - from user coordinates WIP#}
             <!--Script for map/ probably api intensive-->
-            <script src="{{ url_for('static', filename='js/map.js') }}"></script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtW5w3ZWh3ybR-1TDFZLWcVw-qiSSlEFY&callback=initMap&libraries=&v=weekly" async></script>
-
-            <div class="col-md-6">
-                <div id="map" style="height: 400px; width: 95%;"></div>
+            <script>
+                {% set splitLocation = userlocation.split(',') %}
+                const userLocation = {lat: parseFloat({{splitLocation[0]}}), lng: parseFloat({{splitLocation[1]}})};
+                console.log(userLocation)
+            </script>
+            <script src="{{ url_for('static', filename='js/map.js') }}" defer></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs8VKdl9noduet_kYpiBM_MRXL64YfZBY&libraries=&v=weekly"></script>
+            <script>
+                window.onload = function() {
+                    if (typeof initMap === 'function') {
+                        initMap();
+                    } else {
+                        console.error("initMap function not defined.");
+                    }
+                }
+            </script>
+            <div class="col-5">
+                <div id="map" style="height: 500px; width: 100%;"></div>
             </div>
         </div>
     </div>
