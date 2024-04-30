@@ -19,34 +19,18 @@
     {% endif %}
 </head>
     <body class="">
-{#        <header>#}
-{#            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">#}
-{#                <div class="container-fluid">#}
-{#                    <a class="navbar-brand" href="/">#}
-{#                        <img src="{{ url_for('static', filename="images/logo.png")}}" alt="Get2Helping" style="height: 45px">#}
-{#                    </a>#}
-{#                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">#}
-{#                        <span class="navbar-toggler-icon"></span>#}
-{#                    </button>#}
-{#                    <div class="collapse navbar-collapse" id="navbarCollapse">#}
-{#                        <div class="navbar-nav">#}
-{#                            <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>#}
-{#                            <a href="{{ url_for('about') }}" class="nav-item nav-link">Our Mission</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </nav>#}
-{#        </header>#}
         <div class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="row container-fluid justify-content-md-center">
                 <div class="col-md-auto d-flex justify-content-center">
                     <a class="navbar-brand" href="/">
-                        <img src="{{ url_for('static', filename="images/logo.png")}}" alt="Get2Helping" style="height: 45px">
+                        <img src="{{ url_for('static', filename="images/logo.png")}}" alt="Get2Helping" style="height: 55px">
                     </a>
                 </div>
                 <div class="col-lg-11">
                     <div class="pr-3">
+                        <a href="{{ url_for("home") }}">
                         <h1 class="text-center mr-5 text-white pt-2"><u>Get2Helping</u></h1>
+                        </a>
                     </div>
                 </div>
             </div>
