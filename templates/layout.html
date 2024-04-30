@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-secondary">
 <head>
         <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -12,34 +13,30 @@
     <link rel="script" href="{{ url_for('static', filename='js/map.js') }}">
 
     {% if name %}
-        <title>Flask - {{ name }}</title>
+        <title>Get2Helping - {{ name }}</title>
     {% else %}
-        <title>Flask Page</title>
+        <title>Get2Helping</title>
     {% endif %}
 </head>
     <body class="">
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="/">Get2Helping</a>
-                    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav">
-                            <a href="{{ url_for('home') }}" class="nav-item nav-link">Home</a>
-                            <a href="{{ url_for('search') }}" class="nav-item nav-link">Search</a>
-                            <a href="{{ url_for('test_maps') }}" class="nav-item nav-link">debug-api</a>
-                        </div>
-                            <div class="navbar-nav ms-auto">
-                                <a href="{{ url_for('about') }}" class="nav-item nav-link">Our Mission</a>
-                                <a href="#" class="nav-item nav-link">-</a>
-                            </div>
+        <div class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="row container-fluid justify-content-md-center">
+                <div class="col-md-auto d-flex justify-content-center">
+                    <a class="navbar-brand" href="/">
+                        <img src="{{ url_for('static', filename="images/logo.png")}}" alt="Get2Helping" style="height: 55px">
+                    </a>
+                </div>
+                <div class="col-lg-11">
+                    <div class="pr-3">
+                        <a href="{{ url_for("home") }}">
+                        <h1 class="text-center mr-5 text-white pt-2"><u>Get2Helping</u></h1>
+                        </a>
                     </div>
                 </div>
-            </nav>
-        </header>
-        <div style="min-height: 500px;">
+            </div>
+        </div>
+
+        <div class="" style="min-height: 700px;">
         {% block content %}{% endblock %}
         </div>
         <!-- Optional JavaScript -->

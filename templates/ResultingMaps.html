@@ -3,30 +3,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-    <h1>Places Nearby</h1>
+    <div class="ml-4 mt-2">
+    <h1><u>Nearby Locations</u></h1>
+    </div>
     {# Create a cointainer for scrollable and clickable items   #}
     <div>
-        <div class="row">
-            <div class="col-md-6">
-                <div style="max-height: 400px; overflow-y: auto">
+        <div class="container-fluid row py-4 justify-content-center">
+            <div class="col-6 text-center">
+                <div class="container-fluid rounded" style="max-height: 500px; overflow-y: auto">
                     <ul class="list-unstyled">
                         {% for place in places %}
-                            <li class="container-fluid border py-3 my-1">
-                                <h3>{{ place.name }}</h3>
-
-                                {# Website #}
-                                {% if place.website %}
-                                    <button type="button" class="btn btn-primary" onclick=" window.open('{{ place.website }}','_blank')">Website</button>
-                                {% else %}
-                                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Website Unavailable" disabled>Website</button>
-                                {% endif %}
-
-                                {# Phone Number #}
-                                {% if place.local_phone_number %}
-                                    <a href="tel:{{ place.local_phone_number }}" class="btn btn-primary">Call</a>
-                                {% else %}
-                                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Calling Unavailable" disabled>Call</button>
-                                {% endif %}
+                            <li class="container-fluid py-3 my-1 rounded btn btn-outline-dark" onclick="updateDestination({{ place.geo_location["lat"] }}, {{ place.geo_location["lng"] }}, '{{ place.name }}')">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <h3>{{ place.name }}</h3>
+                                    </div>
+                                    <div class="col text-right">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    </div>
+                                </div>
+                                <div class="row ml-1">
+                                    {# Website #}
+                                    <div class="mx-1">
+                                    {% if place.website %}
+                                        <button type="button" class="btn btn-primary" onclick=" window.open('{{ place.website }}','_blank')">Website</button>
+                                    {% else %}
+                                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Website Unavailable" disabled>Website</button>
+                                    {% endif %}
+                                    </div>
+                                    <div class="mx-1">
+                                    {# Phone Number #}
+                                    {% if place.local_phone_number %}
+                                        <a href="tel:{{ place.local_phone_number }}" class="btn btn-primary">Call</a>
+                                    {% else %}
+                                        <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Calling Unavailable" disabled>Call</button>
+                                    {% endif %}
+                                    </div>
+                                </div>
                             </li>
                         {% endfor %}
                     </ul>
@@ -34,15 +47,26 @@
             </div>
 
             {# Map Object - from user coordinates WIP#}
-
             <!--Script for map/ probably api intensive-->
-            <script src="{{ url_for('static', filename='js/map.js') }}"></script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtW5w3ZWh3ybR-1TDFZLWcVw-qiSSlEFY&callback=initMap&libraries=&v=weekly" async></script>
-
-            <div class="col-md-6">
-                <div id="map" style="height: 400px; width: 95%;"></div>
+            <script>
+                {% set splitLocation = userlocation.split(',') %}
+                const userLocation = {lat: parseFloat({{splitLocation[0]}}), lng: parseFloat({{splitLocation[1]}})};
+                console.log(userLocation)
+            </script>
+            <script src="{{ url_for('static', filename='js/map.js') }}" defer></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDs8VKdl9noduet_kYpiBM_MRXL64YfZBY&libraries=&v=weekly"></script>
+            <script>
+                window.onload = function() {
+                    if (typeof initMap === 'function') {
+                        initMap();
+                    } else {
+                        console.error("initMap function not defined.");
+                    }
+                }
+            </script>
+            <div class="col-5">
+                <div id="map" style="height: 500px; width: 100%;"></div>
             </div>
-            {#<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2983.3559422956973!2d-88.08220618902294!3d41.604814082361564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x880e5de7e212468d%3A0x209b430a53abcc7c!2sLewis%20University!5e0!3m2!1sen!2sus!4v1711046120584!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>#}
         </div>
     </div>
 </body>
