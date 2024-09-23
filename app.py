@@ -33,4 +33,4 @@ def about():  # put application's code here
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", ssl_context='adhoc', port=5000, debug=False)
